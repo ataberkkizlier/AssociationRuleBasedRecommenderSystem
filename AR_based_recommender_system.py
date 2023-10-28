@@ -82,13 +82,13 @@ rules = gathered_data_test(df)
 
 
 def arl_recommender(rules_df, service, rec_count=1):
-    # Sort the rules based on lift in descending order
+    
     sorted_rules = rules_df.sort_values("lift", ascending=False)
 
-    # Filter the rules where the antecedent contains the given service
+    
     filtered_rules = sorted_rules[sorted_rules["antecedents"].apply(lambda x: service in x)]
 
-    # Extract the recommended services from the filtered rules
+    
     recommendation_list = [', '.join(rule) for rule in filtered_rules["consequents"].apply(list).tolist()[:rec_count]]
 
     return recommendation_list[0:rec_count]
